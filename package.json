@@ -1,0 +1,39 @@
+{
+  "name": "express5",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "type": "commonjs",
+  "engines": {
+    "node": "22.x",
+    "npm": "10.x"
+  },
+  "scripts": {
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "pro": "tsc && node dist/index.js",
+    "start": "node dist/index.js",
+    "typeorm": "typeorm-ts-node-commonjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.0.1",
+    "helmet": "^8.0.0",
+    "morgan": "^1.10.0",
+    "pg": "^8.13.1",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.20"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^22.8.7",
+    "@types/pg": "^8.11.10",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
+
+

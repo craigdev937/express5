@@ -13,8 +13,8 @@
     "start": "node dist/index.js",
     "typeorm": "typeorm-ts-node-commonjs"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["TypeScript", "Express.js 5", "PostgreSQL", "TypeORM"],
+  "author": "Craig Johnson",
   "license": "ISC",
   "description": "",
   "dependencies": {

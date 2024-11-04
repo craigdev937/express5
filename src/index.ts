@@ -26,7 +26,7 @@ import { dBase } from "./data/db";
         next();
     });
 
-    app.use(express.urlencoded({ extended: true }));
+    app.use(express.urlencoded());
     app.use(express.json());
     app.use(logger("dev"));
     app.use("/api/player", playRt);

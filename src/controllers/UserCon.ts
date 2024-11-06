@@ -74,21 +74,8 @@ class UserClass {
     };
 
     Me: express.Handler = async (req, res, next) => {
-        try {
-            const token = req.cookies.token;
-            if (!token) throw new Error("Unquthenticated!");
-            const email: any = jwt.verify(token, process.env.JWT_SECRET!);
-            const user = await UserModel.findOneBy({ email });
-            if (!user) throw new Error("Unquthenticated!");
-            res
-                .status(res.statusCode)
-                .json(user);
-        } catch (error) {
-            res
-                .status(res.statusCode)
-                .json(res.statusMessage);
-            next(error);
-        }
+        res.json(res.locals.user);
+        next();
     };
 
     Logout: express.Handler = async (req, res, next) => {

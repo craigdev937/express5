@@ -3,7 +3,8 @@ import "reflect-metadata";
 import express from "express";
 import helmet from "helmet";
 import logger from "morgan";
-import { playRt } from "./routes/PlayerRt";
+import cookieParser from "cookie-parser";
+import { userRt } from "./routes/UserRt";
 import { dBase } from "./data/db";
 
 (async () => {
@@ -28,8 +29,9 @@ import { dBase } from "./data/db";
 
     app.use(express.urlencoded());
     app.use(express.json());
+    app.use(cookieParser());
     app.use(logger("dev"));
-    app.use("/api/player", playRt);
+    app.use("/api/auth", userRt);
     const port = process.env.PORT;
     app.listen(port, () => {
         console.log(`Server: http://localhost:${port}`);

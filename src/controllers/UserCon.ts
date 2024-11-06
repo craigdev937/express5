@@ -77,14 +77,31 @@ class UserClass {
         try {
             const token = req.cookies.token;
             if (!token) throw new Error("Unquthenticated!");
-            const { userName }: any = jwt.verify(token, process.env.JWT_SECRET!);
-            const user = await UserModel.findOne({
-                where: { email: req.body.email }
-            });
+            const email: any = jwt.verify(token, process.env.JWT_SECRET!);
+            const user = await UserModel.findOneBy({ email });
             if (!user) throw new Error("Unquthenticated!");
             res
                 .status(res.statusCode)
-                .json(userName);
+                .json(user);
+        } catch (error) {
+            res
+                .status(res.statusCode)
+                .json(res.statusMessage);
+            next(error);
+        }
+    };
+
+    Logout: express.Handler = async (req, res, next) => {
+        try {
+            res.set("Set-Cookie", cookie.serialize("token", "", {
+                secure: true,
+                sameSite: "strict",
+                expires: new Date(0),
+                path: "/"
+            }));
+            res
+                .status(res.statusCode)
+                .json({ success: true });
         } catch (error) {
             res
                 .status(res.statusCode)

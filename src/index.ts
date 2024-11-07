@@ -5,6 +5,7 @@ import helmet from "helmet";
 import logger from "morgan";
 import cookieParser from "cookie-parser";
 import { userRt } from "./routes/UserRt";
+import { postRt } from "./routes/PostRt";
 import { dBase } from "./data/db";
 
 (async () => {
@@ -32,6 +33,7 @@ import { dBase } from "./data/db";
     app.use(cookieParser());
     app.use(logger("dev"));
     app.use("/api/auth", userRt);
+    app.use("/api/post", postRt);
     const port = process.env.PORT;
     app.listen(port, () => {
         console.log(`Server: http://localhost:${port}`);

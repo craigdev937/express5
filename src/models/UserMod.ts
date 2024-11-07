@@ -1,25 +1,22 @@
 import bcrypt from "bcrypt";
 import { IsEmail, Length } from "class-validator";
-import { BaseEntity, BeforeInsert, CreateDateColumn, 
-    Entity, Index, Column,
-    PrimaryGeneratedColumn, 
-    UpdateDateColumn } from "typeorm";
+import { BeforeInsert, Entity, 
+    Index, Column, OneToMany } from "typeorm";
+import { BaseMod } from "./BaseMod";
+import { PostModel } from "./PostMod";
 
 @Entity({name: "users"})
-export class UserModel extends BaseEntity {
-    @PrimaryGeneratedColumn() id: number;
+export class UserModel extends BaseMod {
     @Column() first: string;
-    @Column() last: string;
-    
+    @Column() last: string;    
     @Index()
     @IsEmail()
     @Column({ unique: true }) email: string;
-
     @Length(6, 30)
     @Column() password: string;
 
-    @CreateDateColumn() createdAt: Date;
-    @UpdateDateColumn() updatedAt: Date;
+    @OneToMany(() => PostModel, (post) => post.user)
+    posts: PostModel[];
 
     @BeforeInsert()
     async hashPassword() {
